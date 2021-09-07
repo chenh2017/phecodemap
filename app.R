@@ -9,6 +9,7 @@ library(RColorBrewer)
 library(readr)
 library(rintrojs)
 library(shiny)
+library(shinyBS)
 library(shinycssloaders)
 library(shinydashboard)
 library(shinydashboardPlus)
@@ -16,12 +17,29 @@ library(shinyWidgets)
 
 
 source("utils.R")
-load("data.RData")
+load("../data/phecodemap.RData")
 
 
-nav_home <- dashboardPage(
-  dashboardHeader(disable = TRUE),
-  dashboardSidebar(width = "0px"),
+ui <- dashboardPage(
+  dashboardHeader(title = "KESER Network",
+                  leftUi = tagList(
+                    includeCSS("www/style.css"),
+                    downloadButton("instruct", " About",
+                                   icon = icon("book"),
+                                   class="btn btn-primary header-button",
+                                   width = "100px",
+                                   style = "padding: 6px 20px 6px 20px;"),
+                    actionButton("help", " Help",
+                                 icon = icon("question"),
+                                 class="btn btn-primary header-button",
+                                 width = "100px",
+                                 style = "padding: 6px 20px 6px 20px;")
+
+
+                  ),
+                  titleWidth = "200pt"
+  ),
+  dashboardSidebar(width = "0px", minified = FALSE),
   dashboardBody(
     introjsUI(),
     tags$head(
@@ -83,21 +101,15 @@ nav_home <- dashboardPage(
         icon = icon("cog")
       ),
       uiOutput("ui_tree")
+    ),
+
+    bsModal(
+      id = "instruction", title = "Instruction", trigger = "instruct",
+      size = "large",
+      includeMarkdown("www/Documentation.md")
     )
+
   )
-)
-
-
-nav_doc <- fluidPage(includeHTML("www/Documentation.html"),
-                     includeCSS("www/Documentation.css"))
-
-ui <- navbarPage(
-  title = "Phecode Mapping",
-  id = "navbar",
-  tabPanel("Home", nav_home),
-  tabPanel("About", nav_doc),
-  tabPanel("Help", ""),
-  fluid = TRUE
 )
 
 
@@ -105,17 +117,10 @@ ui <- navbarPage(
 
 
 server <- function(input, output, session) {
-  observe({
-    if (input$navbar == "Help") {
-      updateNavbarPage(session, "navbar", selected = "Home")
-      introjs(session,
-        options = list(
-          steps = steps[, -1],
-          showBullets = FALSE
-        )
-      )
-    }
-  })
+  observeEvent(input$help, {
+    introjs(session,
+            options = list(steps=steps[, -1],
+                           showBullets = FALSE))})
 
 
   output$ui_table <- renderUI({
