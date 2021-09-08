@@ -21,7 +21,7 @@ load("../data/phecodemap.RData")
 
 
 ui <- dashboardPage(
-  dashboardHeader(title = "KESER Network",
+  dashboardHeader(title = "PheCode Map with ICD",
                   leftUi = tagList(
                     includeCSS("www/style.css"),
                     downloadButton("instruct", " About",
