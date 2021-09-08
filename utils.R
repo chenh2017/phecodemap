@@ -1,9 +1,31 @@
 
 # color for ICD9s, ICD10s, highlightNode, Phecode
-colorlist <- c("lightblue", "palegreen", "red",
-               brewer.pal(9, "Set1")[c(5, 4, 6, 7, 2, 3, 8)],
-               brewer.pal(9, "Set3")[c(2:4,6:12)],
-               brewer.pal(9, "Set1")[9])
+
+# qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+# 70 colors
+# col_vector = unique(unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals))))
+
+col_vector <- c("#984EA3", "#FFFF33", "#A65628", "#F781BF",
+                "#FFD92F", "#E5C494", "#B3B3B3",
+                "#DECBE4",
+                "#FED9A6", "#FFFFCC", "#E5D8BD",
+                "#BEAED4", "#FDC086", "#FFFF99", "#386CB0",
+                "#F0027F", "#BF5B17", "#1B9E77",
+                "#7570B3", "#66A61E", "#E6AB02", "#A6761D",
+                "#1F78B4", "#33A02C", "#FB9A99",
+                "#FDBF6F", "#6A3D9A", "#8DD3C7",
+                "#B15928",  "#FDDAEC", "#F2F2F2",
+                "#B3E2CD", "#FDCDAC", "#CBD5E8", "#F4CAE4", "#E6F5C9",
+                "#FFF2AE", "#F1E2CC", "#CCCCCC", "#377EB8", "#7FC97F",
+                "#4DAF4A",
+                "#999999", "#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
+                "#A6D854",
+                "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462",
+                "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#FFED6F", "#666666")
+
+
+colorlist <- c("lightblue", "palegreen", "red", "orange", col_vector)
+
 
 buildPath <- function(rootid, icdmap) {
 
