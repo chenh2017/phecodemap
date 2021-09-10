@@ -237,7 +237,7 @@ server <- function(input, output, session) {
         "Select 1 row in the table, Please."
       })
     } else {
-      withSpinner(plotOutput("out_legend"), type = 5)
+      withSpinner(plotOutput("out_legend", height = "450px"), type = 5)
     }
   })
 
