@@ -15,7 +15,7 @@ The PheCode classification is hierarchical. It includes broader disease codes th
 
 ## Using the app
 
-The same PheCode hierarchy is displayed in two ways: as a sunburst plot and as a tree. Select a code or a phenotype to display the relevant classification and hierarchical structure. For clarity and to allow comparison, ICD-9 and ICD-10 codes are shown in separate colors. By default, the plots are centered around the to code, that has no parent code. One can click on the child code of interest in order to center the plot around it.
+The same PheCode hierarchy is displayed in two ways: as a sunburst plot and as a tree. Select a code or a phenotype to display the relevant classification and hierarchical structure. For clarity and to allow comparison, ICD-9 and ICD-10 codes are shown in separate colors. By default, the plots are centered around the top code, that has no parent code. One can click on the child code of interest to collapse/expand the subcodes.
 
 
 
