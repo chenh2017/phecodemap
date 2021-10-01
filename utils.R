@@ -30,9 +30,9 @@ colorlist <- c("lightblue", "palegreen", "red", "orange", col_vector)
 buildPath <- function(rootid, icdmap) {
 
   # rootid <- "296"
-  rootid <- paste0("Phe_", rootid)
+  rootid <- paste0("Phe:", rootid)
   s_map <- icdmap
-  s_map$Phecode <- paste0("Phe_", s_map$Phecode)
+  s_map$Phecode <- paste0("Phe:", s_map$Phecode)
   s_map <- s_map[grepl(paste0(rootid, "\\..+"), s_map$Phecode, perl = TRUE) | (s_map$Phecode == rootid), ]
 
   print(paste("s_map:", nrow(s_map)))
@@ -96,7 +96,7 @@ addClass <- function(rootid, icdmap, df_highlight = df_highlight){
   nodes1$class <- sapply(nodes1$ids, classifyNode)
   # add highlight class
 
-  df_highlight$Phecode <- paste0("Phe_", df_highlight$Phecode)
+  df_highlight$Phecode <- paste0("Phe:", df_highlight$Phecode)
   highligh_nodes <- intersect(node_phe, df_highlight$Phecode)
 
   if (length(highligh_nodes) > 0){
