@@ -34,8 +34,6 @@ ui <- dashboardPage(
                                  class="btn btn-primary header-button",
                                  width = "100px",
                                  style = "padding: 6px 20px 6px 20px;")
-
-
                   ),
                   titleWidth = "200pt"
   ),
@@ -106,7 +104,7 @@ ui <- dashboardPage(
     bsModal(
       id = "instruction", title = "Instruction", trigger = "instruct",
       size = "large",
-      includeMarkdown("www/Documentation.md")
+      includeMarkdown("doc/Documentation.md")
     )
 
   )
@@ -117,6 +115,8 @@ ui <- dashboardPage(
 
 
 server <- function(input, output, session) {
+  
+  steps <- read_tsv("doc/steps.tsv")
   observeEvent(input$help, {
     introjs(session,
             options = list(steps=steps[, -1],
@@ -137,11 +137,11 @@ server <- function(input, output, session) {
   })
 
   output$table_phe <- renderDT(
-    datatable(icdmap[, c(4, 5, 1:3, 6)],
+    datatable(icdmap[, c(4, 5, 1:3)],
       extensions = "Scroller",
       colnames = c(
         "ICD Description" = "ICD_str",
-        "ICD id" = "ICD_id",
+        "ICD code" = "ICD_id",
         "ICD version" = "ICD_version"
       ),
       rownames = FALSE,
@@ -149,8 +149,15 @@ server <- function(input, output, session) {
       filter = "top",
       options = list(
         deferRender = TRUE,
-        pageLength = 6,
+        pageLength = 8,
         dom = "tp",
+        columns = list(
+          list(width = "80px" ),
+          NULL,
+          list(width = "80px" ),
+          list(width = "80px" ),
+          NULL
+        ),
         scrollCollapse = TRUE
       ),
       selection = list(mode = "single",
